@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class Container2 extends StatelessWidget {
-  //final VoidCallback onPopContainer2;
+  final VoidCallback onPopContainer2;
 
-  //Container2({required this.onPopContainer2});
+  Container2({required this.onPopContainer2});
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +88,7 @@ class Container2 extends StatelessWidget {
                     primary: Colors.transparent,
                     
                   ),
-                  onPressed: (){},
+                  onPressed: onPopContainer2,
                   child: Text(
                     'Claim your own plan',
                     style: TextStyle(
@@ -108,7 +108,7 @@ class Container2 extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
-                onPressed: (){},
+                onPressed: onPopContainer2,
                 child: Text(
                   'Select your bank account',
                   style: TextStyle(

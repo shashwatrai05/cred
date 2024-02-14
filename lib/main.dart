@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'container1.dart';
+import 'container2.dart';
 
 void main() {
   runApp(MyApp());
@@ -19,20 +21,18 @@ class MyStackedContainers extends StatefulWidget {
 }
 
 class _MyStackedContainersState extends State<MyStackedContainers> {
-  int _currentContainer = 1;
+  bool _isContainer2Visible = false;
 
-  void _openContainer(int containerNumber) {
+  void _openContainer2() {
     setState(() {
-      _currentContainer = containerNumber;
+      _isContainer2Visible = true;
     });
   }
 
-  void _popContainer() {
-    if (_currentContainer > 1) {
-      setState(() {
-        _currentContainer -= 1;
-      });
-    }
+  void _popContainer2() {
+    setState(() {
+      _isContainer2Visible = false;
+    });
   }
 
   @override
@@ -43,54 +43,13 @@ class _MyStackedContainersState extends State<MyStackedContainers> {
       ),
       body: Stack(
         children: [
-          Container(
-            color: Colors.blue,
-            height: 100.0,
-            child: Center(
-              child: ElevatedButton(
-                onPressed: () => _openContainer(1),
-                child: Text('Open Container 1'),
-              ),
-            ),
+          Container1(
+            onOpenContainer2: _openContainer2,
           ),
-          if (_currentContainer >= 2)
-            Positioned(
-              top: 80.0,
-              child: Container(
-                color: Colors.green,
-                height: 80.0,
-                width: MediaQuery.of(context).size.width,
-                child: Center(
-                  child: ElevatedButton(
-                    onPressed: () => _openContainer(2),
-                    child: Text('Open Container 2'),
-                  ),
-                ),
-              ),
+          if (_isContainer2Visible)
+            Container2(
+              onPopContainer2: _popContainer2,
             ),
-          if (_currentContainer >= 3)
-            Positioned(
-              top: 160.0,
-              child: Container(
-                color: Colors.orange,
-                height: 60.0,
-                width: MediaQuery.of(context).size.width,
-                child: Center(
-                  child: ElevatedButton(
-                    onPressed: () => _openContainer(3),
-                    child: Text('Open Container 3'),
-                  ),
-                ),
-              ),
-            ),
-          Positioned.fill(
-            child: Material(
-              color: Colors.transparent,
-              child: InkWell(
-                onTap: _popContainer,
-              ),
-            ),
-          ),
         ],
       ),
     );
