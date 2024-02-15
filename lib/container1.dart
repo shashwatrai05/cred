@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 
 
 class Container1 extends StatefulWidget {
-  final VoidCallback onOpenContainer2;
+   final VoidCallback onOpenContainer2;
+  final VoidCallback onCloseContainer2;
 
-  Container1({required this.onOpenContainer2});
+  Container1({required this.onOpenContainer2, required this.onCloseContainer2});
 
   @override
   _Container1State createState() => _Container1State();
@@ -19,6 +20,10 @@ class _Container1State extends State<Container1> {
     });
 
     widget.onOpenContainer2(); // Notify the parent about the toggle
+
+    if (_isExpanded) {
+      widget.onCloseContainer2(); // Close Container2
+    }
   }
 
   @override
@@ -37,7 +42,7 @@ class _Container1State extends State<Container1> {
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color: Colors.black87,
+                color: _isExpanded? Colors.black87:Colors.black26,
               ),
               child: Padding(
                 padding: EdgeInsets.all(20),

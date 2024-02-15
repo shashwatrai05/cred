@@ -1,3 +1,4 @@
+import 'package:cred/container3.dart';
 import 'package:flutter/material.dart';
 import 'container1.dart';
 import 'container2.dart';
@@ -10,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: MyStackedContainers(),
+      home: Container3(),
     );
   }
 }
@@ -50,15 +51,16 @@ void _closeContainer2() {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Stacked Containers'),
-      ),
+      backgroundColor: Colors.grey.shade900,
+      
       body: Stack(
         children: [
           Container1(
-            onOpenContainer2: _openContainer2,
-            //isExpanded: _isContainer1Expanded,
-          ),
+  onOpenContainer2: _openContainer2,
+  onCloseContainer2: _closeContainer2, // Pass the new callback
+  //isExpanded: _isContainer1Expanded,
+),
+
           if (_isContainer2Visible)
             Container2(
               onPopContainer2: _popContainer2,
