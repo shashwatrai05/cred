@@ -18,7 +18,7 @@ class CustomWidget extends StatelessWidget {
     return Container(
       height: 170,
       width: 140,
-      padding: EdgeInsets.all(12.0),
+      padding: const EdgeInsets.all(12.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         color: containerColor,
@@ -27,7 +27,7 @@ class CustomWidget extends StatelessWidget {
             color: Colors.grey.withOpacity(0.3),
             spreadRadius: 2,
             blurRadius: 5,
-            offset: Offset(0, 2),
+            offset: const Offset(0, 2),
           ),
         ],
       ),
@@ -42,29 +42,29 @@ class CustomWidget extends StatelessWidget {
               color: containerColor.withOpacity(0.9),
               shape: BoxShape.circle,
             ),
-            child: Icon(Icons.check, size: 40),
+            child: const Icon(Icons.check, size: 40),
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           Text(
             amountText,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
               color: Colors.white,
             ),
           ),
-          SizedBox(height: 4),
+          const SizedBox(height: 4),
           Text(
             durationText,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 12,
               color: Colors.white,
             ),
           ),
-          SizedBox(height: 12),
+          const SizedBox(height: 12),
           Text(
             calculationsText,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.bold,
             ),

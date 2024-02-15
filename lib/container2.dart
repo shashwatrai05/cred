@@ -1,9 +1,25 @@
 import 'package:flutter/material.dart';
+import './custom_widget.dart';
 
-class Container2 extends StatelessWidget {
+class Container2 extends StatefulWidget {
   final VoidCallback onPopContainer2;
+  final VoidCallback onOpenContainer1;
 
-  Container2({required this.onPopContainer2});
+  Container2({required this.onPopContainer2, required this.onOpenContainer1});
+
+  @override
+  _Container2State createState() => _Container2State();
+}
+
+class _Container2State extends State<Container2> {
+  // You can add any necessary state variables or methods here
+
+  // Handle the press of the "Credit Amount" button
+  void _onCreditAmountPressed() {
+    // Close Container2 and open Container1
+    widget.onPopContainer2();
+    widget.onOpenContainer1();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,11 +33,11 @@ class Container2 extends StatelessWidget {
         ),
         height: MediaQuery.of(context).size.height * 0.7,
         child: Padding(
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text(
+              const Text(
                 'How do you wish to repay?',
                 style: TextStyle(
                   fontSize: 24,
@@ -29,9 +45,9 @@ class Container2 extends StatelessWidget {
                   fontWeight: FontWeight.w600,
                 ),
               ),
-              SizedBox(height: 12),
-              Text(
-                'Choose one of the recommanded plan to make your own',
+              const SizedBox(height: 12),
+              const Text(
+                'Choose one of the recommended plans to make your own',
                 style: TextStyle(
                   fontSize: 16,
                   color: Colors.white54,
@@ -39,57 +55,48 @@ class Container2 extends StatelessWidget {
                 ),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: <Widget>[
-                      CustomWidget(
-                  containerColor: Colors.brown,
-                  amountText: '4,272/mo',
-                  durationText: 'For 12 months',
-                  calculationsText: 'See Calculations',
-                ),
-                
-                SizedBox(width: 15,),
-                
                     CustomWidget(
-                  containerColor: Colors.purple.shade300,
-                  amountText: '5,860/mo',
-                  durationText: 'For 9 months',
-                  calculationsText: 'See Calculations',
-                ),
-
-                SizedBox(width: 15,),
-                
+                      containerColor: Colors.brown,
+                      amountText: '4,272/mo',
+                      durationText: 'For 12 months',
+                      calculationsText: 'See Calculations',
+                    ),
+                    const SizedBox(width: 15),
                     CustomWidget(
-                  containerColor: Colors.blue.shade400,
-                  amountText: '5,860/mo',
-                  durationText: 'For 9 months',
-                  calculationsText: 'See Calculations',
-                ),
+                      containerColor: Colors.purple.shade300,
+                      amountText: '5,860/mo',
+                      durationText: 'For 9 months',
+                      calculationsText: 'See Calculations',
+                    ),
+                    const SizedBox(width: 15),
+                    CustomWidget(
+                      containerColor: Colors.blue.shade400,
+                      amountText: '5,860/mo',
+                      durationText: 'For 9 months',
+                      calculationsText: 'See Calculations',
+                    ),
                   ],
                 ),
               ),
-
-              SizedBox(height: 20,),
-              
+              const SizedBox(height: 20),
               Container(
-                width: MediaQuery.of(context).size.width*0.5,
+                width: MediaQuery.of(context).size.width * 0.5,
                 alignment: Alignment.centerLeft,
                 decoration: BoxDecoration(
                   border: Border.all(color: Colors.white),
-                  borderRadius: BorderRadius.circular(30)
+                  borderRadius: BorderRadius.circular(30),
                 ),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    
-                   
                     primary: Colors.transparent,
-                    
                   ),
-                  onPressed: onPopContainer2,
-                  child: Text(
+                  onPressed: widget.onPopContainer2,
+                  child: const Text(
                     'Claim your own plan',
                     style: TextStyle(
                       color: Colors.white,
@@ -99,19 +106,19 @@ class Container2 extends StatelessWidget {
                   ),
                 ),
               ),
-               SizedBox(height: 20),
+              const SizedBox(height: 20),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  fixedSize: Size(250, 50),
+                  fixedSize: const Size(250, 50),
                   primary: Colors.blue,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
-                onPressed: onPopContainer2,
-                child: Text(
+                onPressed: _onCreditAmountPressed,
+                child: const Text(
                   'Select your bank account',
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -121,87 +128,6 @@ class Container2 extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-
-
-class CustomWidget extends StatelessWidget {
-  final Color containerColor;
-  final String amountText;
-  final String durationText;
-  final String calculationsText;
-
-  CustomWidget({
-    required this.containerColor,
-    required this.amountText,
-    required this.durationText,
-    required this.calculationsText,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 170,
-      width: 140,
-      padding: EdgeInsets.all(12.0),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: containerColor,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.3),
-            spreadRadius: 2,
-            blurRadius: 5,
-            offset: Offset(0, 2),
-          ),
-        ],
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Container(
-             width: 50, // Adjust the width as needed
-             height: 50, // Adjust the height as needed
-            decoration: BoxDecoration(
-              color: containerColor.withOpacity(0.9), 
-              shape: BoxShape.circle,
-            ),
-           child: Icon(Icons.check,size: 40,),
-          ),
-          SizedBox(height: 8),
-          Text(
-            amountText,
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
-          ),
-          SizedBox(height: 4),
-          Text(
-            durationText,
-            style: TextStyle(
-              fontSize: 12,
-              color: Colors.white,
-            ),
-          ),
-          SizedBox(height: 12),
-          
-           
-          
-             Text(
-              calculationsText,
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          
-        ],
       ),
     );
   }

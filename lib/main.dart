@@ -21,6 +21,7 @@ class MyStackedContainers extends StatefulWidget {
 }
 
 class _MyStackedContainersState extends State<MyStackedContainers> {
+  bool _isContainer1Expanded = true;
   bool _isContainer2Visible = false;
 
   void _openContainer2() {
@@ -35,6 +36,17 @@ class _MyStackedContainersState extends State<MyStackedContainers> {
     });
   }
 
+  void _openContainer1() {
+    setState(() {
+      _isContainer1Expanded = true;
+    });
+  }
+void _closeContainer2() {
+  setState(() {
+    _isContainer2Visible = false;
+  });
+}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,10 +57,12 @@ class _MyStackedContainersState extends State<MyStackedContainers> {
         children: [
           Container1(
             onOpenContainer2: _openContainer2,
+            //isExpanded: _isContainer1Expanded,
           ),
           if (_isContainer2Visible)
             Container2(
               onPopContainer2: _popContainer2,
+              onOpenContainer1: _openContainer1,
             ),
         ],
       ),
